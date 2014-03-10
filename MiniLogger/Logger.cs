@@ -8,7 +8,7 @@ namespace MiniLogger
     /// </summary>
     public class Logger
     {
-        public static LogSeverities[] Severities = new LogSeverities[] { LogSeverities.Log, LogSeverities.Info, LogSeverities.Warning, LogSeverities.Error, LogSeverities.Fatal };
+        public static LogSeverity[] Severities = new LogSeverity[] { LogSeverity.Log, LogSeverity.Info, LogSeverity.Warning, LogSeverity.Error, LogSeverity.Fatal };
 
         //Singleton declaration
         private Logger()
@@ -62,8 +62,8 @@ namespace MiniLogger
         /// Main method to add a Log to the system
         /// </summary>
         /// <param name="inText">Message to Add as Log</param>
-        /// <param name="inSeverity">Severity of the log (used in Filters and to set its Color + some specific treatment for "LogSeverities.Error")</param>
-        public static void Log(string inText, LogSeverities inSeverity)
+        /// <param name="inSeverity">Severity of the log (used in Filters and to set its Color + some specific treatment for "LogSeverity.Error")</param>
+        public static void Log(string inText, LogSeverity inSeverity)
         {
             if (instance != null)
             {

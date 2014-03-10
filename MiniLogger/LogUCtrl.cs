@@ -24,11 +24,11 @@ namespace MiniLogger
         {
             InitializeComponent();
 
-            LogColors.Add(LogSeverities.Error, Color.Maroon);
-            LogColors.Add(LogSeverities.Fatal, Color.Red);
-            LogColors.Add(LogSeverities.Info, Color.DarkGreen);
-            LogColors.Add(LogSeverities.Log, Color.Gray);
-            LogColors.Add(LogSeverities.Warning, Color.DarkOrange);
+            LogColors.Add(LogSeverity.Error, Color.Maroon);
+            LogColors.Add(LogSeverity.Fatal, Color.Red);
+            LogColors.Add(LogSeverity.Info, Color.DarkGreen);
+            LogColors.Add(LogSeverity.Log, Color.Gray);
+            LogColors.Add(LogSeverity.Warning, Color.DarkOrange);
 
             verboseToolStripMenuItem.CheckedChanged += delegate { prefs.ShowLogs = verboseToolStripMenuItem.Checked; RefreshLogs(); };
             infoToolStripMenuItem.CheckedChanged += delegate { prefs.ShowInfos = infoToolStripMenuItem.Checked; RefreshLogs(); };
@@ -36,7 +36,7 @@ namespace MiniLogger
             errorToolStripMenuItem.CheckedChanged += delegate { prefs.ShowErrors = errorToolStripMenuItem.Checked; RefreshLogs(); };
         }
 
-        private Dictionary<LogSeverities, Color> LogColors = new Dictionary<LogSeverities, Color>();
+        private Dictionary<LogSeverity, Color> LogColors = new Dictionary<LogSeverity, Color>();
 
         Logger logger;
 
@@ -58,10 +58,10 @@ namespace MiniLogger
 
         private bool IsVisible(Log log)
         {
-            if (log.Severity == LogSeverities.Log && !prefs.ShowLogs) { return false; }
-            if (log.Severity == LogSeverities.Info && !prefs.ShowInfos) { return false; }
-            if (log.Severity == LogSeverities.Warning && !prefs.ShowWarnings) { return false; }
-            if (log.Severity == LogSeverities.Error && !prefs.ShowErrors) { return false; }
+            if (log.Severity == LogSeverity.Log && !prefs.ShowLogs) { return false; }
+            if (log.Severity == LogSeverity.Info && !prefs.ShowInfos) { return false; }
+            if (log.Severity == LogSeverity.Warning && !prefs.ShowWarnings) { return false; }
+            if (log.Severity == LogSeverity.Error && !prefs.ShowErrors) { return false; }
 
             return true;
         }
