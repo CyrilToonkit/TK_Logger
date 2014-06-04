@@ -8,7 +8,7 @@ namespace MiniLogger
     /// </summary>
     public class Log
     {
-        public Log(string intext, LogSeverity inSeverity)
+        public Log(string intext, LogSeverities inSeverity)
         {
             text = intext;
             severity = inSeverity;
@@ -22,8 +22,8 @@ namespace MiniLogger
             set { text = value; }
         }
 
-        LogSeverity severity;
-        public LogSeverity Severity
+        LogSeverities severity;
+        public LogSeverities Severity
         {
             get { return severity; }
             set { severity = value; }

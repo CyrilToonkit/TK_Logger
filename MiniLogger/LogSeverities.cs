@@ -6,7 +6,7 @@ namespace MiniLogger
     /// <summary>
     /// Types of available logs
     /// </summary>
-    public enum LogSeverity
+    public enum LogSeverities
     {
         Log, Info, Warning, Error, Fatal
     }

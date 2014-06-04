@@ -24,11 +24,11 @@ namespace MiniLogger
         {
             InitializeComponent();
 
-            LogColors.Add(LogSeverity.Error, Color.Maroon);
-            LogColors.Add(LogSeverity.Fatal, Color.Red);
-            LogColors.Add(LogSeverity.Info, Color.DarkGreen);
-            LogColors.Add(LogSeverity.Log, Color.Gray);
-            LogColors.Add(LogSeverity.Warning, Color.DarkOrange);
+            LogColors.Add(LogSeverities.Error, Color.Maroon);
+            LogColors.Add(LogSeverities.Fatal, Color.Red);
+            LogColors.Add(LogSeverities.Info, Color.DarkGreen);
+            LogColors.Add(LogSeverities.Log, Color.Gray);
+            LogColors.Add(LogSeverities.Warning, Color.DarkOrange);
 
             verboseToolStripMenuItem.CheckedChanged += delegate { prefs.ShowLogs = verboseToolStripMenuItem.Checked; RefreshLogs(); };
             infoToolStripMenuItem.CheckedChanged += delegate { prefs.ShowInfos = infoToolStripMenuItem.Checked; RefreshLogs(); };
@@ -36,7 +36,7 @@ namespace MiniLogger
             errorToolStripMenuItem.CheckedChanged += delegate { prefs.ShowErrors = errorToolStripMenuItem.Checked; RefreshLogs(); };
         }
 
-        private Dictionary<LogSeverity, Color> LogColors = new Dictionary<LogSeverity, Color>();
+        private Dictionary<LogSeverities, Color> LogColors = new Dictionary<LogSeverities, Color>();
 
         Logger logger;
 
@@ -58,10 +58,10 @@ namespace MiniLogger
 
         private bool IsVisible(Log log)
         {
-            if (log.Severity == LogSeverity.Log && !prefs.ShowLogs) { return false; }
-            if (log.Severity == LogSeverity.Info && !prefs.ShowInfos) { return false; }
-            if (log.Severity == LogSeverity.Warning && !prefs.ShowWarnings) { return false; }
-            if (log.Severity == LogSeverity.Error && !prefs.ShowErrors) { return false; }
+            if (log.Severity == LogSeverities.Log && !prefs.ShowLogs) { return false; }
+            if (log.Severity == LogSeverities.Info && !prefs.ShowInfos) { return false; }
+            if (log.Severity == LogSeverities.Warning && !prefs.ShowWarnings) { return false; }
+            if (log.Severity == LogSeverities.Error && !prefs.ShowErrors) { return false; }
 
             return true;
         }
@@ -72,25 +72,28 @@ namespace MiniLogger
         /// <param name="inLog">new Log to add to the Log Control</param>
         void AppendLog(Log inLog)
         {
-            int lengthBefore = LogRTB.TextLength;
-            string pad = "";
-            for (int i = 8 - inLog.Severity.ToString().Length; i > 0; i--)
+            if (!LogRTB.IsDisposed)
             {
-                pad += " ";
-            }
+                int lengthBefore = LogRTB.TextLength;
+                string pad = "";
+                for (int i = 8 - inLog.Severity.ToString().Length; i > 0; i--)
+                {
+                    pad += " ";
+                }
 
-            string log = String.Format("{0}{1}: {2}\r\n", inLog.Severity, pad, inLog.Text);
+                string log = String.Format("{0}{1}: {2}\r\n", inLog.Severity, pad, inLog.Text);
 
-            LogRTB.SelectionLength = 0; // clear
-            LogRTB.SelectionStart = 0;
-            LogRTB.SelectedText = log;
+                LogRTB.SelectionLength = 0; // clear
+                LogRTB.SelectionStart = 0;
+                LogRTB.SelectedText = log;
 
-            int length = LogRTB.TextLength - lengthBefore;
+                int length = LogRTB.TextLength - lengthBefore;
 
-            // Textbox may transform chars, so (end-start) != text.Length
-            LogRTB.Select(0, length);
-            {
-                LogRTB.SelectionColor = LogColors[inLog.Severity];
+                // Textbox may transform chars, so (end-start) != text.Length
+                LogRTB.Select(0, length);
+                {
+                    LogRTB.SelectionColor = LogColors[inLog.Severity];
+                }
             }
         }
 
