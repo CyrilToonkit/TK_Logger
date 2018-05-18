@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace MiniLogger
 {
     /// <summary>
-    /// Simple pure data class that stands for a logging Message
+    /// Simple class that stands for a logging Message
     /// </summary>
     public class Log
     {
