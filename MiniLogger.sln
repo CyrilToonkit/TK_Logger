@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniLogger", "MiniLogger\MiniLogger.csproj", "{9E82F54D-7DF2-4BB5-836C-53A22048AA95}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerTester", "LoggerTester\LoggerTester.csproj", "{70698CFA-C075-47E9-9AE7-636236677E15}"
